@@ -8,9 +8,9 @@
 #get-started
   .buttons
     = link_to 'Install Bundler & Create a Simple Work Flow', '/v1.3/get_started.html#install-bundler'
-  %table{:cellspacing => 0}
-    %tr
-      %td
+  #getstartedcolumn
+    .table
+      .leftcolumn
         %ul
           %li
             = link_to "Set Up Your Application to Use Bundler", '/v1.3/get_started.html#setting-up-your-application-to-use-bundler'
@@ -20,7 +20,7 @@
             = link_to 'Check Your Code into Version Control', '/v1.3/get_started.html#checking-your-code-into-version-control'
           %li
             = link_to 'Share Your Application With Other Developers', '/v1.3/get_started.html#sharing-your-application-with-other-developers'
-      %td
+      .rightcolumn
         %ul
           %li
             = link_to 'Updating a Dependency', '/v1.3/get_started.html#updating-a-dependency'
@@ -28,6 +28,7 @@
             = link_to 'Updating a Gem Without Modifying the Gemfile', '/v1.3/get_started.html#updating-a-gem-without-modyfying-the-gemfile'
           %li
             = link_to 'Deploying Your Application', '/v1.3/get_started.html#deploying-your-application'
+
 
 %h2#use-bundler Use Bundler with
 .buttons
