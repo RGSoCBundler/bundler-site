@@ -134,6 +134,9 @@ code
     padding-right: 43px
     color: $header-color
 
+#get-started
+  +important(rgba(0,0,0,0.1))
+
 #footer
   +box-sizing(border-box)
   +flexbox(horizontal, center)
@@ -360,3 +363,17 @@ pre
   p
     margin-left: 150px
     padding-left: 1.5em
+
+#getstartedcolumn
+.table
+  +flexbox(horizontal, left)
+  width: 725px
+  position: relative
+  padding: 0px 10px 0px 10px
+  font-size: 80%
+  .left.column
+    +flexbox(horizontal, left)
+    width: 350px
+  .right.column
+    +flexbox(horizontal, left)
+    width: 350px
