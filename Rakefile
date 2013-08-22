@@ -34,13 +34,20 @@ task :man => [:update_vendor] do
   cp_r "build/v1.3/man", "build/man"
 end
 
+desc "Pull in ISSUES.md from the master branch."
+task :report_issue => [:update_vendor] do
+  Dir.chdir "vendor/bundler" do
+    cp(FileList["ISSUES.md"], "../../source/")
+  end
+end
+
 desc "Build the static site"
 task :build do
   sh "middleman build --clean"
 end
 
 desc "Release the current commit to bundler/bundler@gh-pages"
-task :release => [:update_vendor, :build, :man] do
+task :release => [:update_vendor, :build, :man, :report_issue] do
   commit = `git rev-parse HEAD`.chomp
 
   Dir.chdir "vendor/bundler" do
