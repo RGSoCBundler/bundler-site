@@ -5,9 +5,20 @@
 
 %h2#getting-started
   Get Started
+
+.contents
+  .bullet
+    .description
+    :highlight_ruby
+      gem install bundler  
+      bundle init  
+      echo "gem 'rails'" >> Gemfile  
+      bundle install  
+      bundle exec rails new myapp
+
 #get-started
   .buttons
-    = link_to 'Install Bundler & Create a Simple Work Flow', '/v1.3/get_started.html#install-bundler'
+    = link_to 'Install Bundler - A Simple Work Flow', '/v1.3/get_started.html#install-bundler'
   #get-started-column
     .get-started-container
       .leftcolumn
