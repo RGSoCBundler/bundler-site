@@ -1,25 +1,30 @@
 %h2 Getting Started with Bundler is Easy!
 #get-started
   .buttons
-    = link_to 'Install Bundler - A Simple Bundler Workflow', '#install-bundler'
+    = link_to 'Install Bundler - A Simple Bundler Workflow', 
+    '#install-bundler'
   #get-started-column
     .get-started-container
       .leftcolumn
         %ul
           %li
-            = link_to "Set Up Your Application to Use Bundler", '#setting-up-your-application-to-use-bundler'
+            = link_to "Set Up Your Application to Use Bundler", 
+            '#setting-up-your-application-to-use-bundler'
           %li
             = link_to 'Group Your Dependencies', '#grouping-your-dependencies'
           %li
-            = link_to 'Check Your Code into Version Control', '#checking-your-code-into-version-control'
+            = link_to 'Check Your Code into Version Control', 
+            '#checking-your-code-into-version-control'
           %li
-            = link_to 'Share Your Application With Other Developers', '#sharing-your-application-with-other-developers'
+            = link_to 'Share Your Application With Other Developers', 
+            '#sharing-your-application-with-other-developers'
       .rightcolumn
         %ul
           %li
             = link_to 'Updating a Dependency', '#updating-a-dependency'
           %li
-            = link_to 'Updating a Gem Without Modifying the Gemfile', '#updating-a-gem-without-modyfying-the-gemfile'
+            = link_to 'Updating a Gem Without Modifying the Gemfile', 
+            '#updating-a-gem-without-modyfying-the-gemfile'
           %li
             = link_to 'Deploying Your Application', '#deploying-your-application'
 
@@ -44,7 +49,10 @@
       gem 'rspec', :require => 'spec'
 
     .notes
-      This <code>Gemfile</code> says a few things. First, it says that bundler should look for gems declared in the <code>Gemfile</code> at <code>http://rubygems.org</code>. You can declare multiple Rubygems sources, and bundler will look for gems in the order you declared the sources.
+      This <code>Gemfile</code> says a few things. First, it says that bundler should 
+      look for gems declared in the <code>Gemfile</code> at <code>http://rubygems.org</code>. 
+      You can declare multiple Rubygems sources, and bundler will look for gems in the order 
+      you declared the sources.
     = link_to 'Learn More: Gemfiles', '/v1.3/gemfile.html'
 
   .bullet
@@ -56,7 +64,11 @@
           $ bundle install    # <code>bundle</code> is a shortcut for <code>bundle install</code>
 
       %p
-        Bundler will connect to <code>rubygems.org</code> (and any other sources that you declared), and find a list of all of the required gems that meet the requirements you specified. Because all of the gems in your <code>Gemfile</code> have dependencies of their own (and some of those have their own dependencies), running <code>bundle install</code> on the <code>Gemfile</code> above will install quite a few gems.
+        Bundler will connect to <code>rubygems.org</code> (and any other sources that you declared), 
+        and find a list of all of the required gems that meet the requirements you specified. 
+        Because all of the gems in your <code>Gemfile</code> have dependencies of their own 
+        (and some of those have their own dependencies), running <code>bundle install</code> on the 
+        <code>Gemfile</code> above will install quite a few gems.
 
         :highlight_plain
             $ bundle install
@@ -98,7 +110,8 @@
 
           %li
             %p
-              If <code>bundle install</code> reports a conflict between your <code>Gemfile</code> and <code>Gemfile.lock</code>, run:
+              If <code>bundle install</code> reports a conflict between your <code>Gemfile</code> and 
+              <code>Gemfile.lock</code>, run:
 
               :highlight_plain
                 $ bundle update sinatra
@@ -114,11 +127,15 @@
                 $ bundle update
 
           %li
-            Whenever your <code>Gemfile.lock</code> changes, always check it in to version control. It keeps a history of the exact versions of all third-party code that you used to successfully run your application.
-      
+            Whenever your <code>Gemfile.lock</code> changes, always check it in to version control. 
+            It keeps a history of the exact versions of all third-party code that you used to successfully 
+            run your application.
+
       = link_to 'Learn More: bundle install', '/v1.3/bundle_install.html'
       .notes
-        The second command adds the Gemfile and Gemfile.lock to your repository. This ensures that other developers on your app, as well as your deployment environment, will all use the same third-party code that you are using now.
+        The second command adds the Gemfile and Gemfile.lock to your repository. This ensures that 
+        other developers on your app, as well as your deployment environment, will all use the same 
+        third-party code that you are using now.
 
   .bullet
     .description

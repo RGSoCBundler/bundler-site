@@ -1,22 +1,27 @@
 %h2 What is Bundler?
 
 #intro
-  Bundler maintains a consistent environment for ruby applications. It tracks an application's code and the rubygems it needs to run, so that an application will always have the exact gems (and versions) that it needs to run.
+  Bundler maintains a consistent environment for ruby applications. It tracks an 
+  application's code and the rubygems it needs to run, so that an application will 
+  always have the exact gems (and versions) that it needs to run.
 
 %h2#getting-started
   Get Started
-
-.contents
-  .bullet
-    .description
-    :highlight_ruby
-      gem install bundler  
-      bundle init  
-      echo "gem 'rails'" >> Gemfile  
-      bundle install  
-      bundle exec rails new myapp
-
 #get-started
+
+  You only need a few commands to get going in Bundler. For more complete directions 
+  look at the links below.
+  .contents
+    .bullet
+      .description
+      :highlight_plain
+        $ gem install bundler  
+        $ bundle init  
+        $ echo "gem 'rails'" >> Gemfile  
+        $ bundle install  
+        $ bundle exec rails new myapp
+
+
   .buttons
     = link_to 'Install Bundler - A Simple Work Flow', '/v1.3/get_started.html#install-bundler'
   #get-started-column
@@ -24,19 +29,23 @@
       .leftcolumn
         %ul
           %li
-            = link_to "Set Up Your Application to Use Bundler", '/v1.3/get_started.html#setting-up-your-application-to-use-bundler'
+            = link_to "Set Up Your Application to Use Bundler", 
+            '/v1.3/get_started.html#setting-up-your-application-to-use-bundler'
           %li
             = link_to 'Group Your Dependencies', '/v1.3/get_started.html#grouping-your-dependencies'
           %li
-            = link_to 'Check Your Code into Version Control', '/v1.3/get_started.html#checking-your-code-into-version-control'
+            = link_to 'Check Your Code into Version Control', 
+            '/v1.3/get_started.html#checking-your-code-into-version-control'
           %li
-            = link_to 'Share Your Application With Other Developers', '/v1.3/get_started.html#sharing-your-application-with-other-developers'
+            = link_to 'Share Your Application With Other Developers', 
+            '/v1.3/get_started.html#sharing-your-application-with-other-developers'
       .rightcolumn
         %ul
           %li
             = link_to 'Updating a Dependency', '/v1.3/get_started.html#updating-a-dependency'
           %li
-            = link_to 'Updating a Gem Without Modifying the Gemfile', '/v1.3/get_started.html#updating-a-gem-without-modyfying-the-gemfile'
+            = link_to 'Updating a Gem Without Modifying the Gemfile', 
+            '/v1.3/get_started.html#updating-a-gem-without-modyfying-the-gemfile'
           %li
             = link_to 'Deploying Your Application', '/v1.3/get_started.html#deploying-your-application'
 
@@ -62,7 +71,10 @@
   = link_to 'The man pages', '/v1.3/man/bundle.1.html'
 
 %h2#get-involved Get involved
-%p Bundler has a lot of contributors and users, and they all talk to each other quite a bit. If you have questions, try the IRC channel or mailing list. If you're interested in contributing to the project (no programming skills needed), read the contributing guide. If you have sponsorship or security questions, please contact the core team directly.
+%p Bundler has a lot of contributors and users, and they all talk to each other quite a bit. 
+If you have questions, try the IRC channel or mailing list. If you're interested in 
+contributing to the project (no programming skills needed), read the contributing guide. 
+If you have sponsorship or security questions, please contact the core team directly.
 .buttons
   = link_to '#bundler on IRC', 'http://webchat.freenode.net/?channels=bundler'
   = link_to 'Mailing list', 'http://groups.google.com/group/ruby-bundler'
@@ -71,11 +83,13 @@
 
 .shirts
   .content
-    = link_to 'http://www.devswag.com/collections/bundler', :class => 'image', :onclick => "ga('send', 'devswag');" do
+    = link_to 'http://www.devswag.com/collections/bundler', :class => 'image', 
+    :onclick => "ga('send', 'devswag');" do
       = image_tag '/images/bundler-shirt.png'
     %p
       Want to show the world you support Bundler?
       %br
       Buy Bundler shirts and stickers at
-      = link_to 'DevSwag', 'http://www.devswag.com/collections/bundler', :onclick => "ga('send', 'devswag');"
+      = link_to 'DevSwag', 'http://www.devswag.com/collections/bundler', 
+      :onclick => "ga('send', 'devswag');"
 
