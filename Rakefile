@@ -40,7 +40,7 @@ task :issues => [:update_vendor] do
     cp(FileList["ISSUES.md"], "../../source/")
   end
   Dir.chdir "source" do
-    sh "mv ISSUES.md issues.md"
+    sh "mv ISSUES.md _ISSUES.md"
   end
 end
 
