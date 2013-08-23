@@ -35,9 +35,12 @@ task :man => [:update_vendor] do
 end
 
 desc "Pull in ISSUES.md from the master branch."
-task :report_issue => [:update_vendor] do
+task :issues => [:update_vendor] do
   Dir.chdir "vendor/bundler" do
     cp(FileList["ISSUES.md"], "../../source/")
+  end
+  Dir.chdir "source" do
+    sh "mv ISSUES.md issues.md"
   end
 end
 
