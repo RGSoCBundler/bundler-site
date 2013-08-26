@@ -37,12 +37,10 @@ end
 desc "Pulls in ISSUES.md from the master branch."
 task :issues => [:update_vendor] do
 
-  mkdir_p "build/shared"
-
   Dir.chdir "vendor/bundler" do
     sh "git reset --hard HEAD"
     sh "git checkout origin/master"
-    cp "ISSUES.md", "../../build/shared/_ISSUES.md"
+    cp "ISSUES.md", "../../source/issues.md"
   end
 
 end
