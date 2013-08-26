@@ -46,7 +46,7 @@ task :issues => [:update_vendor] do
 end
 
 desc "Build the static site"
-task :build do
+task :build => [:issues] do
   sh "middleman build --clean"
 end
 
