@@ -36,12 +36,15 @@ end
 
 desc "Pull in ISSUES.md from the master branch."
 task :issues => [:update_vendor] do
+
+  mkdir_p "build/shared"
+
   Dir.chdir "vendor/bundler" do
-    cp(FileList["ISSUES.md"], "../../source/")
+    sh "git reset --hard HEAD"
+    sh "git checkout origin/master"
+    cp "ISSUES.md", "../../build/shared/_ISSUES.md"
   end
-  Dir.chdir "source" do
-    sh "mv ISSUES.md shared/_ISSUES.md"
-  end
+
 end
 
 desc "Build the static site"
@@ -50,7 +53,7 @@ task :build do
 end
 
 desc "Release the current commit to bundler/bundler@gh-pages"
-task :release => [:update_vendor, :build, :man, :report_issue] do
+task :release => [:update_vendor, :build, :man, :issues] do
   commit = `git rev-parse HEAD`.chomp
 
   Dir.chdir "vendor/bundler" do
