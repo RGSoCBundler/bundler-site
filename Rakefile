@@ -34,7 +34,7 @@ task :man => [:update_vendor] do
   cp_r "build/v1.3/man", "build/man"
 end
 
-desc "Pull in ISSUES.md from the master branch."
+desc "Pulls in ISSUES.md from the master branch."
 task :issues => [:update_vendor] do
 
   mkdir_p "build/shared"
