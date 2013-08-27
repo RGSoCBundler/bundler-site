@@ -141,7 +141,7 @@ code
   +box-sizing(border-box)
   +flexbox(horizontal, center)
   +distribute-children(justify)
-  padding: 8px 16px
+  padding: 20px 20px
   background-color: rgba(0,0,0,0.1)
   width: 100%
   margin-top: 25px
@@ -165,7 +165,6 @@ code
 
   #navigation
     +flexbox(vertical, center)
-
     p
       font-family: Helvetica, sans-serif
       color: #366
@@ -173,6 +172,12 @@ code
       margin: 0
       a
         +bundler-link
+  a
+    +button
+    padding: 8px 5px 5px 5px
+    margin: 5px 0 5px 0
+    display: inline
+    color: #003
 
 .contents
   width: 725px
@@ -266,7 +271,7 @@ pre
 #credits
   p
     text-align: center
-    font-size: 11pt
+    font-size: 14pt
     color: #668493
     a, a:visited
       color: #2c596b
