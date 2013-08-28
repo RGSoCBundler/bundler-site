@@ -45,26 +45,13 @@
               %li= link_to 'Rubygems', '/v1.3/rubygems.html'
               %li= link_to 'RubyMotion', '/v1.3/rubymotion.html'
 
-    #footer
-      .button_footer
-        = link_to 'Get Started', '/#getting-started'
-        = link_to 'Report a Bug', '/issues.html'
-        = link_to "See What's New", '/v1.3/whats_new.html'
-        = link_to 'Read Documentation', '/v1.3/man/bundle.1.html'
-        = link_to 'Discuss and Contribute', '/#get-involved'
-        = link_to 'Bundler Workflow', '/v1.3/bundler_workflow.html'
-        = link_to 'Bundler\'s GitHub', 'https://github.com/bundler/bundler/'
-
-
   #credits
     %p
       = image_tag 'emocow.png'
       = image_tag 'panda.jpg'
-      = image_tag 'bundler-small.png'
-    %p
       == Many thanks to Bundler's #{link_to 'contributors', '/contributors.html' }
       == and #{link_to 'sponsors', '/sponsors.html' }
-
+      = image_tag 'bundler-small.png'
 
     %a#github{ :href => 'http://github.com/bundler/bundler/' }
       %img{ :src => 'http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png', :alt => 'Fork me on GitHub' }
