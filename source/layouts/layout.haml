@@ -45,53 +45,16 @@
               %li= link_to 'Rubygems', '/v1.3/rubygems.html'
               %li= link_to 'RubyMotion', '/v1.3/rubymotion.html'
 
-    #footer
-      = image_tag 'emocow.png'
-      = image_tag 'panda.jpg'
-      .spacer
-      #navigation
-        %p
-          %b commands
-          = link_to 'install', "/#{v}/man/bundle-install.1.html"
-          \/
-          = link_to 'update', "/#{v}/man/bundle-update.1.html"
-          \/
-          = link_to 'exec', "/#{v}/man/bundle-exec.1.html"
-          \/
-          = link_to 'config', "/#{v}/man/bundle-config.1.html"
-          - if v == 'v0.9'
-            \/
-            = link_to 'lock', "/#{v}/bundle_lock.html"
-          \/
-          = link_to 'package', "/#{v}/man/bundle-package.1.html"
-        %p
-          %b usage
-          = link_to 'gemfile', "/#{v}/gemfile.html"
-          \/
-          = link_to 'git', "/#{v}/git.html"
-          \/
-          = link_to 'groups', "/#{v}/groups.html"
-          \/
-          = link_to 'setup', "/#{v}/bundler_setup.html"
-          \/
-          = link_to 'deploying', "/#{v}/deploying.html"
-        %p
-          %b frameworks
-          = link_to 'ruby', "/#{v}/bundler_setup.html"
-          \/
-          = link_to 'rubygems', "/#{v}/rubygems.html"
-          \/
-          = link_to 'rubymotion', "/#{v}/rubymotion.html"
-          \/
-          = link_to 'sinatra', "/#{v}/sinatra.html"
-          \/
-          = link_to 'rails 3', "/#{v}/rails3.html"
-      .spacer
-      = image_tag 'bundler-small.png'
-    #credits
-      %p
-        == Many thanks to Bundler's #{link_to 'contributors', '/contributors.html' }
-        == and #{link_to 'sponsors', '/sponsors.html' }
+  #footer
+    = image_tag 'emocow.png'
+    = image_tag 'panda.jpg'
+    .spacer
+    == Many thanks to Bundler's #{link_to 'contributors', '/contributors.html' }
+    == and #{link_to 'sponsors', '/sponsors.html' }
+    .spacer
+    - logosm_img = image_tag('bundler-small.png', :alt => "The best way to manage your application's dependencies", )
+    = link_to logosm_img, '/', :class => 'image'
+
     %a#github{ :href => 'http://github.com/bundler/bundler/' }
       %img{ :src => 'http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png', :alt => 'Fork me on GitHub' }
     #prod-versions
@@ -107,3 +70,30 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-39559982-1', 'bundler.io');
       ga('send', 'pageview');
+
+  .bottom-nav
+    = link_to 'Get Started  |', '/#getting-started'
+    = link_to 'Report a Bug  |', '/issues.html'
+    = link_to "See What's New  |", '/v1.3/whats_new.html'
+    = link_to 'Read documentation  |', '/v1.3/man/bundle.1.html'
+    = link_to 'Discuss and Contribute  |', '/#get-involved'
+    = link_to 'bundle install  |', '/v1.3/bundle_install.html'
+    = link_to 'bundle update  |', '/v1.3/bundle_update.html'
+    = link_to 'View All Commands  |', '/v1.3/commands.html'
+    = link_to 'Gemfile  |', '/v1.3/gemfile.html'
+    = link_to 'Gems from Git  |', '/v1.3/git.html'
+    = link_to 'Grouping  |', '/v1.3/groups.html'
+    = link_to 'Bundler.setup  |', '/v1.3/bundler_setup.html'
+    = link_to 'Deploying  |', '/v1.3/deploying.html'
+    = link_to 'Rails 3  |', '/v1.3/rails3.html'
+    = link_to 'Rails 2.3  |', '/v1.3/rails23.html'
+    = link_to 'Sinatra  |', '/v1.3/sinatra.html'
+    = link_to 'Rubygems  |', '/v1.3/rubygems.html'
+    = link_to 'RubyMotion  |', '/v1.3/rubymotion.html'
+    = link_to 'Docs v0.9  |','v0.9/'
+    = link_to 'Docs v1.0  |','v1.0/'
+    = link_to 'Docs v1.1  |','v1.1/'
+    = link_to 'Docs v1.2  |','v1.2/'
+    = link_to 'Docs v1.3 ','v1.3/'
+
+
