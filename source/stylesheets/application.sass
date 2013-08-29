@@ -141,10 +141,11 @@ code
   +box-sizing(border-box)
   +flexbox(horizontal, center)
   +distribute-children(justify)
-  padding: 5px 5px
+  padding: 0px 8px 0px 8px
   background-color: rgba(0,0,0,0.1)
   width: 100%
-  margin-top: 5px
+  margin-top: 10px
+  margin-bottom: 25px
 
   img:first-child
     +box-shadow(blue, 0, 0, 5px)
@@ -162,10 +163,13 @@ code
 
   img
     display: block
+    margin-top: -5px
+
 
   text-align: center
-  font-size: 14pt
-  color: #668493
+  font-size: 12pt
+  font-weight: bold
+  color: #366
   a, a:visited
     color: #2c596b
     text-decoration: none
@@ -373,3 +377,15 @@ pre
   p
     margin-left: 150px
     padding-left: 1.5em
+
+.bottom-nav
+  +box-sizing(border-box)
+  +flexbox(horizontal, center)
+  +distribute-children(justify)
+  font-size: 90%
+  line-height: 150%
+  margin-top: 15px 8px 8px 8px
+  padding: 0px 10px 10px 10px
+
+  a, a:visited
+    color: rgba(0,0,0,0.3)
