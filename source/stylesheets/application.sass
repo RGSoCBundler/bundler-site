@@ -141,10 +141,10 @@ code
   +box-sizing(border-box)
   +flexbox(horizontal, center)
   +distribute-children(justify)
-  padding: 20px 20px
+  padding: 5px 5px
   background-color: rgba(0,0,0,0.1)
   width: 100%
-  margin-top: 25px
+  margin-top: 5px
 
   img:first-child
     +box-shadow(blue, 0, 0, 5px)
@@ -163,15 +163,22 @@ code
   img
     display: block
 
-  #navigation
-    +flexbox(vertical, center)
-    p
-      font-family: Helvetica, sans-serif
-      color: #366
-      font-size: 16px
-      margin: 0
-      a
-        +bundler-link
+  text-align: center
+  font-size: 14pt
+  color: #668493
+  a, a:visited
+    color: #2c596b
+    text-decoration: none
+
+#navigation
+  +flexbox(vertical, center)
+  p
+    font-family: Helvetica, sans-serif
+    color: #366
+    font-size: 16px
+    margin: 0
+    a
+      +bundler-link
   a
     +button
     padding: 8px 5px 5px 5px
@@ -267,15 +274,6 @@ pre
 
 .bullet:not(:nth-of-type(1))
   padding-top: 15px
-
-#credits
-  p
-    text-align: center
-    font-size: 14pt
-    color: #668493
-    a, a:visited
-      color: #2c596b
-      text-decoration: none
 
 #github
   img

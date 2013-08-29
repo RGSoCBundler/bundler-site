@@ -45,13 +45,14 @@
               %li= link_to 'Rubygems', '/v1.3/rubygems.html'
               %li= link_to 'RubyMotion', '/v1.3/rubymotion.html'
 
-  #credits
-    %p
-      = image_tag 'emocow.png'
-      = image_tag 'panda.jpg'
-      == Many thanks to Bundler's #{link_to 'contributors', '/contributors.html' }
-      == and #{link_to 'sponsors', '/sponsors.html' }
-      = image_tag 'bundler-small.png'
+  #footer
+    = image_tag 'emocow.png'
+    = image_tag 'panda.jpg'
+    .spacer
+    == Many thanks to Bundler's #{link_to 'contributors', '/contributors.html' }
+    == and #{link_to 'sponsors', '/sponsors.html' }
+    .spacer
+    = image_tag 'bundler-small.png'
 
     %a#github{ :href => 'http://github.com/bundler/bundler/' }
       %img{ :src => 'http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png', :alt => 'Fork me on GitHub' }
