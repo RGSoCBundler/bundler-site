@@ -6,14 +6,6 @@
 #standalone
   %h2#bundlers-purpose-and-rationale
     Bundler's Purpose and Rationale
-
-  %p
-    We designed bundler to make it easy to share your code across a number of development,
-    staging and production machines. Of course, you know how to share your own application
-    or gem: stick it on GitHub and clone it where you need it. Bundler makes it easy to
-    make sure that your application has the dependencies it needs to start up and run without
-    errors.
-
   %p
     First, you declare these dependencies in a file at the root of your application, called
     <code>Gemfile</code>. It looks something like this:
@@ -147,74 +139,6 @@
     need to put in a <code>:require</code> directive in the <code>Gemfile</code>). For much
     larger <code>Gemfile</code>s, using <code>Bundler.require</code> allows you to skip
     repeating a large stack of requirements.
-
-  %h2#grouping-your-dependencies
-    Grouping Your Dependencies
-
-  %p
-    You'll sometimes have groups of gems that only make sense in particular environments.
-    For instance, you might develop your app (at an early stage) using SQLite, but deploy it
-    using <code>mysql2</code> or <code>pg</code>. In this example, you might not have MySQL
-    or Postgres installed on your development machine, and want bundler to skip it.
-
-  %p
-    To do this, you can group your dependencies:
-
-  :highlight_ruby
-    source 'http://rubygems.org'
-
-    gem 'rails', '3.2.2'
-    gem 'rack-cache', :require => 'rack/cache'
-    gem 'nokogiri', '~> 1.4.2'
-
-    group :development do
-      gem 'sqlite3'
-    end
-
-    group :production do
-      gem 'pg'
-    end
-
-  %p
-    Now, in development, you can instruct bundler to skip the <code>production</code> group:
-
-  :highlight_plain
-    $ bundle install --without production
-
-  %p
-    Bundler will remember that you installed the gems using <code>--without
-    production</code>. For curious readers, bundler stores the flag in
-    <code>APP_ROOT/.bundle/config</code>. You can see all of the settings that bundler saved
-    there by running <code>bundle config</code>, which will also print out global settings
-    (stored in <code>~/.bundle/config</code>), and settings set via environment variables.
-    For more information on configuring bundler, please see
-    #{link_to 'bundle config', './bundle_config.html'}.
-
-  %p
-    If you run <code>bundle install</code> later, without any flag, bundler will remember
-    that you last called <code>bundle install --without production</code>, and use that flag
-    again. When you <code>require 'bundler/setup'</code>, bundler will ignore gems in these
-    groups.
-
-  %p
-    You can also specify which groups to automatically require through the parameters to
-    <code>Bundler.require</code>. The <code>:default</code> group includes all gems not
-    listed under any group. If you call <code>Bundler.require(:default, :development)</code>,
-    bundler will <code>require</code> all the gems in the <code>:default</code> group, as
-    well as the gems in the <code>:development</code> group.
-
-  %p
-    By default, a Rails generated app calls <code>Bundler.require(:default,
-    Rails.env)</code> in your <code>application.rb</code>, which links the groups in your
-    <code>Gemfile</code> to the Rails environment. If you use other groups (not linked to a
-    Rails environment), you can add them to the call to <code>Bundler.require</code>, if you
-    want them to be automatically required.
-
-  %p
-    Remember that you can always leave groups of gems out of <code>Bundler.require</code>,
-    and then require them manually using Ruby's <code>require</code> at the appropriate
-    place in your app. You might do this because requiring a certain gem takes some time,
-    and you don't need it every time you boot your application.
 
   %h2#checking-your-code-into-version-control
     Checking Your Code into Version Control
@@ -382,72 +306,138 @@
     number of the third-party packages you depend on have released new versions since you
     last did a full update.
 
-  %h2#deploying-your-application
-    Deploying Your Application
+  %h2#faq-1
+    FAQ: Why Can't I Just Specify Only <code>=</code> Dependencies?
 
   %p
-    When you run <code>bundle install</code>, bundler will (by default), install your gems
-    to your system repository of gems. This means that they will show up in <code>gem
-    list</code>. Additionally, if you are developing a number of applications, you will not
-    need to download and install gems in common for each application. This is nice for
-    development, but somewhat problematic for deployment.
+    <strong>Q:</strong> I understand the value of locking my gems down to specific versions,
+    but why can't I just specify <code>=</code> versions for all my dependencies in the
+    <code>Gemfile</code> and forget about the <code>Gemfile.lock</code>?
 
   %p
-    In a deployment scenario, the Unix user you deploy with may not have access to install
-    gems to a system location. Even if the user does (or you use <code>sudo</code>), the
-    user that boots the application may not have access to them. For instance, Passenger
-    runs its Ruby subprocesses with the user <code>nobody</code>, a somewhat restricted
-    user. The tradeoffs in a deployment environment lean more heavily in favor of isolation
-    (even at the cost of a somewhat slower deploy-time <code>bundle install</code> when some
-    third-party dependencies have changed).
+    <strong>A:</strong> Many of your gems will have their own dependencies, and they are
+    unlikely to specify <code>=</code> dependencies. Moreover, it is probably unwise for
+    gems to lock down all of *their* dependencies so strictly. The <code>Gemfile.lock</code>
+    allows you to specify the versions of the dependencies that your application needs in
+    the <code>Gemfile</code>, while remembering all of the exact versions of third-party
+    code that your application used when it last worked correctly.
 
   %p
-    As a result, bundler comes with a <code>--deployment</code> flag that encapsulates the
-    best practices for using bundler in a deployment environment. These practices are based
-    on significant feedback we have received during the development of bundler, as well as a
-    number of bug reports that mostly reflected a misunderstanding of how to best configure
-    bundler for deployment. The <code>--deployment</code> flags adds the following defaults:
+    By specifying looser dependencies in your <code>Gemfile</code> (such as
+    <code>nokogiri ~> 1.4.2</code>), you gain the ability to run
+    <code>bundle update nokogiri</code>, and let bundler handle updating **only**
+    <code>nokogiri</code> and its dependencies to the latest version that still
+    satisfied the <code>~> 1.4.2</code> version requirement. This
+    also allows you to say "I want to use the current version of nokogiri" (<code>gem
+    'nokogiri'</code> in your <code>Gemfile</code>) without having to look up the exact
+    version number, while still getting the benefits of ensuring that your application
+    always runs with exactly the same versions of all third-party code.
 
-  %ul
-    %li
-      Instead of installing gems to the system location, bundler will install gems to
-      <code>vendor/bundle</code> inside your application. Bundler will transparently remember
-      this location when you invoke it inside your application (with
-      <code>Bundler.setup</code> and <code>Bundler.require</code>).
-    %li
-      Bundler will not use gems already installed to your system, even if they exist.
-    %li
-      If you have run <code>bundle pack</code>, checked in the <code>vendor/cache</code>
-      directory, and do not have any git gems, Bundler will not contact the internet while
-      installing your bundle.
-    %li
-      Bundler will require a <code>Gemfile.lock</code> snapshot, and fail if you did not
-      provide one.
-    %li
-      Bundler will not transparently update your <code>Gemfile.lock</code> if it is out of
-      date with your <code>Gemfile</code>
+  %h2#faq-2
+    FAQ: Why Can't I Just Submodule Everything?
 
   %p
-    If you use Capistrano, you should symlink <code>vendor/bundle</code> to
-    <code>shared/vendor_bundle</code> so that bundler will share your installed gems between
-    deployments (making things zippy if you didn't make any changes), but still give you the
-    benefits of isolation from other applications.
+    <strong>Q:</strong> I don't understand why I need bundler to manage my gems in this
+    manner. Why can't I just get the gems I need and stick them in submodules, then put each
+    of the submodules on the load path?
 
   %p
-    By defaulting the bundle directory to <code>vendor/bundle</code>, and installing your
-    bundle as part of your deployment process, you can be sure that the same Unix user that
-    checked out your application also installed the third-party code your application needs.
-    This means that if Passenger (or Unicorn) can see your application, it can also see its
-    dependencies.
+    <strong>A:</strong> Unfortunately, that solution requires that you manually resolve all
+    of the dependencies in your application, including dependencies of dependencies. And
+    even once you do that successfully, you would need to redo that work if you wanted to
+    update a particular gem. For instance, if you wanted to update the <code>rails</code>
+    gem, you would need to find all of the gems that depended on dependencies of Rails
+    (<code>rack</code>, <code>erubis</code>, <code>i18n</code>, <code>tzinfo</code>, etc.),
+    and find new versions that satisfy the new versions of Rails' requirements.
 
   %p
-    The <code>--deployment</code> flag requires an up-to-date <code>Gemfile.lock</code> to
-    ensure that the testing you have done (in development and staging) actually reflects the
-    code you put into production. You can run <code>bundle check</code> before deploying
-    your application to make sure that your <code>Gemfile.lock</code> is up-to-date. Note
-    that it will always be up-to-date if you have run <code>bundle install</code>,
-    successfully booted your application (or run your tests) since the last time you changed
+    Frankly, this is the sort of problem that computers are good at, and which you, a
+    developer, should not need to spend time doing.
+
+  %p
+    More concerningly, if you made a mistake in the manual dependency resolution process,
+    you would not get any feedback about conflicts between different dependencies, resulting
+    in subtle runtime errors. For instance, if you accidentally stuck the wrong version of
+    <code>rack</code> in a submodule, it would likely break at runtime, when Rails or
+    another dependency tried to rely on a method that was not present.
+
+  %p
+    Bottom line: even though it might seem simpler at first glance, it is decidedly
+    significantly more complex.
+
+  %h2#faq-3
+    FAQ: Why Is Bundler Downloading Gems From <code>--without</code> Groups?
+
+  %p
+    <strong>Q:</strong> I ran <code>bundle install --without production</code> and bundler
+    is still downloading the gems in the <code>:production</code> group. Why?
+
+  %p
+    <strong>A:</strong> Bundler's <code>Gemfile.lock</code> has to contain exact versions of all
+    dependencies in your <code>Gemfile</code>, regardless of any options you pass in. If it
+    did not, deploying your application to production might change all your dependencies,
+    eliminating the benefit of Bundler. You could no longer be sure that your application
+    uses the same gems in production that you used to develop and test with. Additionally,
+    adding a dependency in production might result in an application that is impossible to
+    deploy.
+
+  %p
+    For instance, imagine you have a production-only gem (let's call it
+    <code>rack-debugging</code>) that depends on <code>rack =1.1</code>. If we did not
+    evaluate the production group when you ran <code>bundle install --without
+    production</code>, you would deploy your application, only to receive an error that
+    <code>rack-debugging</code> conflicted with <code>rails</code> (which depends on
+    <code>actionpack</code>, which depends on <code>rack ~> 1.2.1</code>).
+
+  %p
+    Another example: imagine a simple Rack application that has <code>gem 'rack'</code> in
+    the <code>Gemfile</code>. Again, imagine that you put <code>rack-debugging</code> in the
+    <code>:production</code> group. If we did not evaluate the <code>:production</code>
+    group when you installed via <code>bundle install --without production</code>, your app
+    would use <code>rack 1.2.1</code> in development, and you would learn, at deployment
+    time, that <code>rack-debugging</code> conflicts with the version of Rack that you
+    tested with.
+
+  %p
+    In contrast, by evaluating the gems in **all** groups when you call <code>bundle
+    install</code>, regardless of the groups you actually want to use in that environment,
+    we will discover the <code>rack-debugger</code> requirement, and install <code>rack
+    1.1</code>, which is also compatible with the <code>gem 'rack'</code> requirement in
     your <code>Gemfile</code>.
+
+  %p
+    In short, by always evaluating all of the dependencies in your Gemfile, regardless of
+    the dependencies you intend to use in a particular environment, you avoid nasty
+    surprises when switching to a different set of groups in a different environment. And
+    because we just download (but do not install) the gems, you won't have to worry about
+    the possibility of a difficult **installation** process for a gem that you only use in
+    production (or in development).
+
+  %h2#faq-4
+    FAQ: I Have a C Extension That Requires Special Flags to Install
+
+  %p
+    <strong>Q</strong>: I have a C extension gem, such as <code>mysql</code>, which requires
+    special flags in order to compile and install. How can I pass these flags into the
+    installation process for those gems?
+
+  %p
+    <strong>A</strong>: First of all, this problem does not exist for the
+    <code>mysql2</code> gem, which is a drop-in replacement for the <code>mysql</code> gem.
+    In general, modern C extensions properly discover the needed headers.
+
+  %p
+    If you really need to pass flags to a C extension, you can use the <code>bundle
+    config</code> command:
+
+  :highlight_plain
+    $ bundle config build.mysql --with-mysql-config=/usr/local/mysql/bin/mysql_config
+
+  %p
+    Bundler will store this configuration in <code>~/.bundle/config</code>, and bundler will
+    use the configuration for any <code>bundle install</code> performed by the same user. As
+    a result, once you specify the necessary build flags for a gem, you can successfully
+    install that gem as many times as necessary.
 
   %h2#summary
     Summary
